@@ -1,0 +1,78 @@
+.TH KEEPAWAKE 1
+.SH NAME
+keepawake \- Keeps the system awake \- higher\-level than 'caffeinate'
+.SH SYNOPSIS
+.B keepawake
+[\fIoptions\fR]
+.SH DESCRIPTION
+\fBkeepawake\fR will keep the system awake for a specified duration
+of time, during which it will every second output a line displaying
+the hours, minutes, and seconds remaining.
+
+After it completes this countdown, it will ring
+a bell every three seconds (also for
+a specified amount of time) and continue to keep the system awake
+while it does so.
+At first, the bell will be at a very quiet, barely\-audible volume
+(0.1% of the maximum volume) \- but the volume will gradually
+increase (each ring
+being 102% the volume of the previous one) until either the specified
+amount of bell\-ringing time has elapsed or until the maximum bell
+volume has been reached.
+
+Each time \fBkeepawake\fR rings the bell, it will output a line
+specifying how long it has been since the initial countdown period
+has ended as well as the volume of the bell on a scale of 0 being
+absolute silence and 1 being the maximum volume.
+.SH OPTIONS
+The options are processed in the order that they appear on the command line.
+Each option overrides any earlier option to it's contrary.
+.TP
+.BR \-\-help
+Displays this help file.
+If this option is invoked, the program will do nothing \fIexcept\fR
+display the help file.
+
+It should be noted that while this help\-file is written in the
+format of a \fBman\fR page, it's package does not actually
+\fIinstall\fR this help\-file as a \fBman\fR page.
+.TP
+.BR \-scr
+When the system is kept awake, the display will be kept
+awake as well.
+(This is the default behavior of the program but can be
+overridden by the \fB\-xscr\fR option.)
+.TP
+.BR \-tm [\fIminutes\fR] [\fIseconds\fR]
+Sets the duration of this program's countdown period.
+The default is ten minutes.
+.TP
+.BR \-tma [\fIminutes\fR] [\fIseconds\fR]
+Sets the duration of the bell\-ringing period after his
+program's countdown period.
+The default is twenty minutes.
+.TP
+.BR \-u
+Turns off the feature of the bell\-ringing stopping after a certain
+amount of time \- instead switching the program to an aberrant
+mode in which the bell\-ringing continues indefinitely.
+If this option is invoked, the default can be restored via
+the \fB\-xu\fR option.
+
+The developer of this program can not foresee any scenario
+in which use of the \fB\-u\fR option is advisable \- yet it
+is included nonetheless just in case the user is found in
+just such a scenario that is unforeseen by the developer.
+.TP
+.BR \-xscr
+The system will still be kept awake for the run of the command \-
+but the display will not.
+(The default behavior of this program keeps the display awake as well
+as the rest of the system. To restore the default behavior, use
+the \fB\-scr\fR option later in the command line.)
+.TP
+.BR \-xu
+This option overrides the \fB\-u\fR option \- restoring the program's
+default behavior of terminating after a certain amount of time has
+passed during it's bell\-ringing phase.
+Overrides the \fB
