@@ -43,11 +43,11 @@ awake as well.
 (This is the default behavior of the program but can be
 overridden by the \fB\-xscr\fR option.)
 .TP
-.BR \-tm [\fIminutes\fR] [\fIseconds\fR]
+.BR \-tm " " [\fIminutes\fR] " "  [\fIseconds\fR]
 Sets the duration of this program's countdown period.
 The default is ten minutes.
 .TP
-.BR \-tma [\fIminutes\fR] [\fIseconds\fR]
+.BR \-tma " "  [\fIminutes\fR] " "  [\fIseconds\fR]
 Sets the duration of the bell\-ringing period after his
 program's countdown period.
 The default is twenty minutes.
