@@ -49,16 +49,10 @@ sub opto__xu_do {
   $afta_limit = ( 2 > 1 );
 } &argola::setopt('-xu',\&opto__xu_do);
 
-sub opto___help_do {
-  my $lc_loc;
-  my $lc_cm;
-  
-  $lc_loc = &argola::srcd();
-  $lc_cm = "cat";
-  &wraprg::lst($lc_cm,($lc_loc . '/help-file.nroff'));
-  $lc_cm .= ' | nroff -man | less';
-  exec($lc_cm);
-} &argola::setopt('--help',\&opto___help_do);
+
+
+&argola::help_opt('--help','help-file.nroff');
+
 
 &argola::runopts();
 
