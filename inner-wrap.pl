@@ -16,14 +16,31 @@ my $afta_sec = 0;
 my $aft_end;
 my $afta_limit;
 my $asflag = '-d'; # By default display stays awake
+my $incresa = 1.02;
+my $maxvol = 1;
 
 $afta_limit = ( 2 > 1 );
 
+sub opto__rate_do {
+  my $lc_a;
+  $lc_a = ( 1 + ( &argola::getrg() / 100 ) );
+  if ( $lc_a > 2 ) { die "\nFATAL ERROR: keepawake -rate option may not exceed 100.\n\n"; }
+  if ( $lc_a < 1 ) { die "\nFATAL ERROR: keepawake -rate option may not be less than 0.\n\n"; }
+  $incresa = $lc_a;
+} &argola::setopt('-rate',\&opto__rate_do);
 
 sub opto__xscr_do {
   # Just system stays awake
   $asflag = '-i';
 } &argola::setopt('-xscr',\&opto__xscr_do);
+
+sub opto__max_do {
+  my $lc_a;
+  $lc_a = ( &argola::getrg() / 100 );
+  if ( $lc_a > 1 ) { die "\nFATAL ERROR: keepawake -max option may not exceed 100.\n\n"; }
+  if ( $lc_a < 0 ) { die "\nFATAL ERROR: keepawake -max option may not be less than 0.\n\n"; }
+  $maxvol = $lc_a;
+} &argola::setopt('-max',\&opto__max_do);
 
 sub opto__scr_do {
   # Display stays awake
@@ -128,8 +145,8 @@ while ( 2 > 1 )
   system($cmdon);
   sleep(3);
   
-  $volum = ( $volum * 1.02 );
-  if ( $volum > 1 ) { $volum = 1; }
+  $volum = ( $volum * $incresa );
+  if ( $volum > $maxvol ) { $volum = $maxvol; }
 }
 
 

@@ -37,22 +37,34 @@ It should be noted that while this help\-file is written in the
 format of a \fBman\fR page, it's package does not actually
 \fIinstall\fR this help\-file as a \fBman\fR page.
 .TP
-.BR \-scr
+.BR -scr
 When the system is kept awake, the display will be kept
 awake as well.
 (This is the default behavior of the program but can be
 overridden by the \fB\-xscr\fR option.)
 .TP
-.BR \-tm " " [\fIminutes\fR] " "  [\fIseconds\fR]
+.BR -max " " <\fIvol\fR>
+Sets the maximum volume to which the ringing at the end
+can increase - on a scale of 0 to 100.
+The default is 100.
+.TP
+.BR -rate " " <\fIrate\fR>
+Sets the percentage that the volume of the ring will increase
+with each repetition from the time it starts (after the
+initial countdown) to whenever it reaches the maximum volume
+or is interrupted by the user. Must be a value from 0 to 100.
+The default is 2.
+.TP
+.BR -tm " " <\fIminutes\fR> " "  <\fIseconds\fR>
 Sets the duration of this program's countdown period.
 The default is ten minutes.
 .TP
-.BR \-tma " "  [\fIminutes\fR] " "  [\fIseconds\fR]
-Sets the duration of the bell\-ringing period after his
+.BR -tma " "  <\fIminutes\fR> " "  <\fIseconds\fR>
+Sets the duration of the bell-ringing period after his
 program's countdown period.
 The default is twenty minutes.
 .TP
-.BR \-u
+.BR -u
 Turns off the feature of the bell\-ringing stopping after a certain
 amount of time \- instead switching the program to an aberrant
 mode in which the bell\-ringing continues indefinitely.
