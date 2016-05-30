@@ -15,7 +15,7 @@ my $afta_min = 20;
 my $afta_sec = 0;
 my $aft_end;
 my $afta_limit;
-my $asflag = '-d'; # By default display stays awake
+my $asflag = '-full'; # By default display stays awake
 my $incresa = 1.02;
 my $maxvol = 1;
 
@@ -31,7 +31,7 @@ sub opto__rate_do {
 
 sub opto__xscr_do {
   # Just system stays awake
-  $asflag = '-i';
+  $asflag = '-xscr1';
 } &argola::setopt('-xscr',\&opto__xscr_do);
 
 sub opto__max_do {
@@ -44,7 +44,7 @@ sub opto__max_do {
 
 sub opto__scr_do {
   # Display stays awake
-  $asflag = '-d';
+  $asflag = '-full';
 } &argola::setopt('-scr',\&opto__scr_do);
 
 sub opto__tm_do {
@@ -95,7 +95,7 @@ $maxtm = int(($mintm * 2) + 5.2);
 
 
 # Generating First-Round Caffeination Command:
-$cmdon = 'caffeinate ' . $asflag . ' -t ' . $maxtm;
+$cmdon = 'chobakwrap-caff ' . $asflag . ' -sec ' . $maxtm;
 $cmdon .= ' &bg';
 $cmdon = '( ' . $cmdon . ' )';
 $cmdon .= ' > /dev/null 2> /dev/null';
@@ -114,7 +114,7 @@ while ( $nowo < $endo )
 
 
 # Generating Second-Round Caffeination Command:
-$cmdon = 'caffeinate ' . $asflag . ' -t 30';
+$cmdon = 'chobakwrap-caff ' . $asflag . ' -sec 30';
 $cmdon .= ' &bg';
 $cmdon = '( ' . $cmdon . ' )';
 $cmdon .= ' > /dev/null 2> /dev/null';
