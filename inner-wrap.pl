@@ -18,6 +18,9 @@ my $afta_limit;
 my $asflag = '-full'; # By default display stays awake
 my $incresa = 1.02;
 my $maxvol = 1;
+my $goal_f_on = 0;
+my $goal_f_at;
+my $goal_f_is;
 
 $afta_limit = ( 2 > 1 );
 
@@ -66,6 +69,12 @@ sub opto__xu_do {
   $afta_limit = ( 2 > 1 );
 } &argola::setopt('-xu',\&opto__xu_do);
 
+sub opto__wf_do {
+  $goal_f_at = &argola::getrg();
+  $goal_f_is = &argola::getrg();
+  $goal_f_on = 10;
+} &argola::setopt('-wf',\&opto__wf_do);
+
 
 
 &argola::help_opt('--help','help-file.nroff');
@@ -110,6 +119,17 @@ while ( $nowo < $endo )
   sleep($mintm);
   
   $nowo = `date +%s`; chomp($nowo);
+  &engoaler();
+}
+
+sub engoaler {
+  my $lc_cm;
+  my $lc_rs;
+  if ( $goal_f_on < 5 ) { return; }
+  if ( ! ( -f $goal_f_at ) ) { exit(0); }
+  $lc_cm = 'cat ' . &wraprg::bsc($goal_f_at);
+  $lc_rs = `$lc_cm`; chomp($lc_rs);
+  if ( $lc_rs ne $goal_f_is ) { exit(0); }
 }
 
 
@@ -147,6 +167,7 @@ while ( 2 > 1 )
   
   $volum = ( $volum * $incresa );
   if ( $volum > $maxvol ) { $volum = $maxvol; }
+  &engoaler();
 }
 
 
