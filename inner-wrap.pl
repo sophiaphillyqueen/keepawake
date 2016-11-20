@@ -21,6 +21,7 @@ my $maxvol = 1;
 my $goal_f_on = 0;
 my $goal_f_at;
 my $goal_f_is;
+my $prefixar = '';
 
 $afta_limit = ( 2 > 1 );
 
@@ -49,6 +50,10 @@ sub opto__scr_do {
   # Display stays awake
   $asflag = '-full';
 } &argola::setopt('-scr',\&opto__scr_do);
+
+sub opto__pfx_do {
+  $prefixar = &argola::getrg();
+} &argola::setopt('-pfx',\&opto__pfx_do);
 
 sub opto__tm_do {
   $dura_min = &argola::getrg();
@@ -113,7 +118,7 @@ $cmdon .= ' > /dev/null 2> /dev/null';
 while ( $nowo < $endo )
 {
   #system("date");
-  system("echo",&vando(int(($endo - $nowo) + 0.2)));
+  system("echo", $prefixar . &vando(int(($endo - $nowo) + 0.2)));
   
   system($cmdon);
   sleep($mintm);
@@ -159,7 +164,7 @@ while ( 2 > 1 )
   
   
   
-  system("echo",&vando(int(($nowo - $endo) + 0.2)) . ": Current Volume: " . $volum . ":");
+  system("echo", $prefixar . &vando(int(($nowo - $endo) + 0.2)) . ": Current Volume: " . $volum . ":");
   
   system($lc_cm);
   system($cmdon);

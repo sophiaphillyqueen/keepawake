@@ -37,6 +37,10 @@ It should be noted that while this help\-file is written in the
 format of a \fBman\fR page, it's package does not actually
 \fIinstall\fR this help\-file as a \fBman\fR page.
 .TP
+.BR -pfx " " <\fItext\fR>
+The specified text will be prepended to each line of output
+\- in both phases.
+.TP
 .BR -scr
 When the system is kept awake, the display will be kept
 awake as well.
