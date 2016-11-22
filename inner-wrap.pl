@@ -22,6 +22,7 @@ my $goal_f_on = 0;
 my $goal_f_at;
 my $goal_f_is;
 my $prefixar = '';
+my $vibraton = 5;
 
 $afta_limit = ( 2 > 1 );
 
@@ -166,6 +167,22 @@ while ( 2 > 1 )
   
   system("echo", $prefixar . &vando(int(($nowo - $endo) + 0.2)) . ": Current Volume: " . $volum . ":");
   
+  if ( $vibraton > 3 )
+  {
+    my $lc2_vb;
+    my $lc2_cm;
+    $lc2_vb = int($volum * 1000 * 300);
+    &smallify($lc2_vb,2500);
+    $lc2_cm = "chobakwrap-para-vibrate -msec $lc2_vb";
+    if ( $vibraton < 8 )
+    {
+      $lc2_cm .= ' &bg';
+      $lc2_cm = '( ' . $lc2_cm . ' )';
+      $lc2_cm .= ' > /dev/null 2> /dev/null';
+    }
+    system($lc2_cm);
+  }
+  
   system($lc_cm);
   system($cmdon);
   sleep(3);
@@ -175,6 +192,9 @@ while ( 2 > 1 )
   &engoaler();
 }
 
+sub smallify {
+  if ( $_[0] > $_[1] ) { $_[0] = $_[1]; }
+}
 
 
 sub vando {
