@@ -171,7 +171,7 @@ while ( 2 > 1 )
   {
     my $lc2_vb;
     my $lc2_cm;
-    $lc2_vb = int($volum * 1000 * 20);
+    $lc2_vb = int($volum * 1000 * 55);
     &smallify($lc2_vb,2500);
     $lc2_cm = "chobakwrap-para-vibrate -msec $lc2_vb";
     if ( $vibraton < 8 )
