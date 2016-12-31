@@ -23,6 +23,8 @@ my $goal_f_at;
 my $goal_f_is;
 my $prefixar = '';
 my $vibraton = 5;
+my $minorivolume = 0.0001;
+my $orivolume = 0.001;
 
 $afta_limit = ( 2 > 1 );
 
@@ -74,6 +76,12 @@ sub opto__u_do {
 sub opto__xu_do {
   $afta_limit = ( 2 > 1 );
 } &argola::setopt('-xu',\&opto__xu_do);
+
+sub opto__ori_do {
+  $orivolume = (&argola::getrg() / 100);
+  if ( $orivolume < $minorivolume ) { $orivolume = $minorivolume; }
+  if ( $orivolume > 1 ) { $orivolume = 1; }
+} &argola::setopt('-ori',\&opto__ori_do);
 
 sub opto__wf_do {
   $goal_f_at = &argola::getrg();
@@ -150,7 +158,7 @@ $aft_end = `date +%s`; chomp($aft_end);
 $aft_end = int(($aft_end + ($afta_min * 60)) + 0.2);
 $aft_end = int(($aft_end + $afta_sec) + 0.2);
 
-$volum = 0.001;
+$volum = $orivolume;
 while ( 2 > 1 )
 {
   my $lc_cm;
