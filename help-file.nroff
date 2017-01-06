@@ -41,6 +41,10 @@ format of a \fBman\fR page, it's package does not actually
 The specified text will be prepended to each line of output
 \- in both phases.
 .TP
+.BR -ori " " <\fIvol\fR>
+Sets the starting volume of the bell - 100 being the maximum
+value.
+.TP
 .BR -scr
 When the system is kept awake, the display will be kept
 awake as well.
