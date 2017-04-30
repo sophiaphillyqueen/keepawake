@@ -84,6 +84,22 @@ in which use of the \fB\-u\fR option is advisable \- yet it
 is included nonetheless just in case the user is found in
 just such a scenario that is unforeseen by the developer.
 .TP
+.BR -wf " " <\fIfile\fR> " " <\fIcontent\fR>
+The program will only run so long as the file \fIfile\fR
+exists and it's contents are \fIcontent\fR.
+
+If the final character of the file's actual content happens
+to be a newline character, that character will be removed
+before it is compared with the \fIcontent\fR argument.
+This is because this option is written with one-line files
+in mind (though, aside from this measure, does nothing to
+enforce it).
+
+For the time being, a properly formatted command-line
+of this utility will only invoke this option once.
+This is to prevent incompatibilities in the future when
+support for multiple condition-files is added.
+.TP
 .BR \-xscr
 The system will still be kept awake for the run of the command \-
 but the display will not.
