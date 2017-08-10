@@ -104,6 +104,19 @@ sub opto__larmivl_do {
   if ( $alarminterval < 2 ) { $alarminterval = 2; }
 } &argola::setopt('-larmivl',\&opto__larmivl_do);
 
+sub opto__rjlarmivl_do {
+  # Changes the alarm frequency (just like '-larmivl' does)
+  # only this one also auto-adjusts the volime-increase rate to
+  # compensate.
+  my $lc_oldivl;
+  my $lc_newinc;
+  $lc_oldivl = $alarminterval;
+  $alarminterval = &argola::getrg();
+  if ( $alarminterval < 2 ) { $alarminterval = 2; }
+  $lc_newinc = ( $incresa ** ( $alarminterval / $lc_oldivl ) );
+  $incresa = $lc_newinc;
+} &argola::setopt('-rjlarmivl',\&opto__rjlarmivl_do);
+
 
 
 &argola::help_opt('--help','help-file.nroff');
