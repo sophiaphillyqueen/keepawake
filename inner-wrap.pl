@@ -25,6 +25,7 @@ my $prefixar = '';
 my $vibraton = 5;
 my $minorivolume = 0.0001;
 my $orivolume = 0.001;
+my @haltfiles = ();
 
 $afta_limit = ( 2 > 1 );
 
@@ -89,6 +90,10 @@ sub opto__wf_do {
   $goal_f_on = 10;
 } &argola::setopt('-wf',\&opto__wf_do);
 
+sub opto__halt_do {
+  @haltfiles = (@haltfiles,&argola::getrg());
+} &argola::setopt('-halt',\&opto__halt_do);
+
 
 
 &argola::help_opt('--help','help-file.nroff');
@@ -130,7 +135,7 @@ while ( $nowo < $endo )
   system("echo", $prefixar . &vando(int(($endo - $nowo) + 0.2)));
   
   system($cmdon);
-  sleep($mintm);
+  sleep($mintm); &haltonic();
   
   $nowo = `date +%s`; chomp($nowo);
   &engoaler();
@@ -144,6 +149,25 @@ sub engoaler {
   $lc_cm = 'cat ' . &wraprg::bsc($goal_f_at);
   $lc_rs = `$lc_cm`; chomp($lc_rs);
   if ( $lc_rs ne $goal_f_is ) { exit(0); }
+}
+
+sub haltonic {
+  my $lc_eacho;
+  my $lc_counto;
+  $lc_counto = 0;
+  foreach $lc_eacho (@haltfiles)
+  {
+    $lc_counto = int($lc_counto + 1.2);
+    if ( -f $lc_eacho )
+    {
+      while ( -f $lc_eacho )
+      {
+        #system("echo",("HALTED BY: " . $lc_eacho));
+        system("echo",$prefixar . ': HALT ' . $lc_counto . ':');
+        sleep(3);
+      }
+    }
+  }
 }
 
 
@@ -193,7 +217,7 @@ while ( 2 > 1 )
   
   system($lc_cm);
   system($cmdon);
-  sleep(3);
+  sleep(3); &haltonic();
   
   $volum = ( $volum * $incresa );
   if ( $volum > $maxvol ) { $volum = $maxvol; }
