@@ -7,7 +7,7 @@ my $mintm = 1;
 my $maxtm;
 my $nowo;
 my $endo;
-my $larmo;
+my $larmo = 'x';
 my $volum;
 my $dura_min = 10;
 my $dura_sec = 0;
@@ -26,6 +26,7 @@ my $vibraton = 5;
 my $minorivolume = 0.0001;
 my $orivolume = 0.001;
 my @haltfiles = ();
+my $alarminterval = 3;
 
 $afta_limit = ( 2 > 1 );
 
@@ -94,6 +95,15 @@ sub opto__halt_do {
   @haltfiles = (@haltfiles,&argola::getrg());
 } &argola::setopt('-halt',\&opto__halt_do);
 
+sub opto__larm_do {
+  $larmo = &argola::getrg();
+} &argola::setopt('-larm',\&opto__larm_do);
+
+sub opto__larmivl_do {
+  $alarminterval = &argola::getrg();
+  if ( $alarminterval < 2 ) { $alarminterval = 2; }
+} &argola::setopt('-larmivl',\&opto__larmivl_do);
+
 
 
 &argola::help_opt('--help','help-file.nroff');
@@ -104,7 +114,7 @@ sub opto__halt_do {
 
 
 
-{
+if ( $larmo eq 'x' ) {
   my $lc_a;
   my $lc_b;
   my @lc_c;
@@ -172,7 +182,7 @@ sub haltonic {
 
 
 # Generating Second-Round Caffeination Command:
-$cmdon = 'chobakwrap-caff ' . $asflag . ' -sec 30';
+$cmdon = 'chobakwrap-caff ' . $asflag . ' -sec ' . int(($alarminterval * 1.2) + 10.2);
 $cmdon .= ' &bg';
 $cmdon = '( ' . $cmdon . ' )';
 $cmdon .= ' > /dev/null 2> /dev/null';
@@ -186,7 +196,7 @@ $volum = $orivolume;
 while ( 2 > 1 )
 {
   my $lc_cm;
-  $lc_cm = "afplay -v " . $volum . " $larmo &bg";
+  $lc_cm = "afplay -v " . $volum . ' ' . &wraprg::bsc($larmo) . ' &bg';
   $lc_cm = "( " . $lc_cm . " ) > /dev/null 2> /dev/null";
   
   $nowo = `date +%s`; chomp($nowo);
@@ -217,7 +227,7 @@ while ( 2 > 1 )
   
   system($lc_cm);
   system($cmdon);
-  sleep(3); &haltonic();
+  sleep($alarminterval); &haltonic();
   
   $volum = ( $volum * $incresa );
   if ( $volum > $maxvol ) { $volum = $maxvol; }
