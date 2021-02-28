@@ -72,6 +72,10 @@ Sets the duration of the bell-ringing period after his
 program's countdown period.
 The default is twenty minutes.
 .TP
+.BR -tmh " " <\fIhours\fR> " " <\fIminutes\fR> " "  <\fIseconds\fR>
+Sets the duration of this program's countdown period.
+The default is ten minutes.
+.TP
 .BR -u
 Turns off the feature of the bell\-ringing stopping after a certain
 amount of time \- instead switching the program to an aberrant

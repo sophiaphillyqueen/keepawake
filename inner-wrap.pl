@@ -65,6 +65,14 @@ sub opto__tm_do {
   $dura_sec = &argola::getrg();
 } &argola::setopt('-tm',\&opto__tm_do);
 
+sub opto__tmh_do {
+  my $lc_a;
+  $lc_a = &argola::getrg();
+  $lc_a = int( ( $lc_a * 60 ) + &argola::getrg() + 0.2 );
+  $dura_min = $lc_a;
+  $dura_sec = &argola::getrg();
+} &argola::setopt('-tmh',\&opto__tmh_do);
+
 sub opto__tma_do {
   $afta_min = &argola::getrg();
   $afta_sec = &argola::getrg();
